@@ -8,7 +8,7 @@ package com.annoymenot.logic;
 public class Message
 {
     private String phoneNumber;
-    private String type; //Likely unnecessary. Needs discussion.
+    private String type;
 
     public Message(String pN, String t)
     {

@@ -15,7 +15,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <receiver android:name="Call_Manager" >
+                <intent-filter>
+                    <action android:name="android.intent.action.PHONE_STATE" />
+                </intent-filter>
+            </receiver>
+
         </activity>
+
+        <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     </application>
 
 </manifest>

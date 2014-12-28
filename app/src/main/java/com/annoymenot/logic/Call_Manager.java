@@ -9,11 +9,17 @@ import android.telephony.TelephonyManager;
 /**
  * Created by Mattin on 12/28/2014.
  */
-public class Call_Manager extends PhoneStateListener
+public class Call_Manager extends BroadcastReceiver
 {
     private static final String managerType = "CALL";
 
     @Override
+    public void onReceive(Context context, Intent intent)
+    {
+        
+    }
+
+    /*@Override
     public void onCallStateChanged(int state, String incomingNumber)
     {
         if(state == TelephonyManager.CALL_STATE_RINGING)
@@ -24,5 +30,5 @@ public class Call_Manager extends PhoneStateListener
                 //Hangup call.
             }
         }
-    }
+    }*/
 }
