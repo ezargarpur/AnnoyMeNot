@@ -24,7 +24,7 @@ public class Call_Manager extends BroadcastReceiver
     {
         if(state == TelephonyManager.CALL_STATE_RINGING)
         {
-            Message callMessage = new Message(incomingNumber, managerType);
+            Message callMessage = new Message(incomingNumber, FilterType.CALL);
             if(Filter.checkMessage(callMessage))
             {
                 //Hangup call.
