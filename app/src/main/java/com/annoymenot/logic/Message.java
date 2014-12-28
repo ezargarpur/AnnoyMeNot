@@ -8,9 +8,9 @@ package com.annoymenot.logic;
 public class Message
 {
     private String phoneNumber;
-    private String type; //Likely unnecessary. Needs discussion.
+    private FilterType type; //Likely unnecessary. Needs discussion.
 
-    public Message(String pN, String t)
+    public Message(String pN, FilterType t)
     {
         phoneNumber = pN;
         type = t;
@@ -20,7 +20,7 @@ public class Message
     {
         phoneNumber = pN;
     }
-    public void setType(String t)
+    public void setType(FilterType t)
     {
         type = t;
     }
@@ -29,7 +29,7 @@ public class Message
     {
         return phoneNumber;
     }
-    public String setType()
+    public FilterType setType()
     {
         return type;
     }
