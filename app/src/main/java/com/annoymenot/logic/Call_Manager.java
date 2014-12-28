@@ -1,5 +1,8 @@
 package com.annoymenot.logic;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
@@ -8,7 +11,7 @@ import android.telephony.TelephonyManager;
  */
 public class Call_Manager extends PhoneStateListener
 {
-    private final String managerType = "CALL";
+    private static final String managerType = "CALL";
 
     @Override
     public void onCallStateChanged(int state, String incomingNumber)

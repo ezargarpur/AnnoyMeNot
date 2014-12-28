@@ -5,4 +5,5 @@ package com.annoymenot.logic;
  */
 public class Filter
 {
+
 }
