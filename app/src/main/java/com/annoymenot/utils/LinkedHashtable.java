@@ -12,14 +12,12 @@ import java.util.List;
 public class LinkedHashtable<K, V> implements Iterable<V>{
     private Hashtable<K, Node<K, V>> nodes;
     private Node<K, V> prologue; //dummy value to have a constant head
-    private Node<K, V> head, tail;
+    private Node<K, V> tail;
 
-    /**
-     *
-     */
+
     public LinkedHashtable(){
         nodes = new Hashtable<K, Node<K, V>>();
-        prologue = new Node<K, V>(null, null, null);
+        prologue = new Node<K, V>(null, null);
     }
     public void add(K key, V value){
         Node<K, V> node;
@@ -27,20 +25,18 @@ public class LinkedHashtable<K, V> implements Iterable<V>{
             node = nodes.get(key);
             node.setValue(value);
         } else {
-            node = new Node<K, V>(key, value, this);
+            node = new Node<K, V>(key, value);
             nodes.put(key, node);
         }
         if(!prologue.hasNext()){
-
-        }
-        if(head == null){
-            head = node;
+            prologue.setNext(node);
             tail = node;
         } else {
             tail.setNext(node);
             tail = node;
         }
     }
+
     public V get(K key){
         return nodes.get(key).getValue();
     }
@@ -49,34 +45,36 @@ public class LinkedHashtable<K, V> implements Iterable<V>{
     }
     public boolean remove(K key){
         Node<K, V> node = nodes.get(key);
-        head = node.remove();
 
-        return (nodes.remove(key) != null);
+        if(node != null) {
+            node.remove();
+            nodes.remove(key);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public Iterator<V> iterator() {
         Iterator<V> iterator = new Iterator<V>() {
-            Node<K, V> next = head;
+
+            Node<K, V> current = prologue;
             @Override
             public boolean hasNext() {
-                return (next != null);
+                return current.hasNext();
             }
 
             @Override
             public V next() {
-                V value = next.getValue();
-                next = next.getNext();
-
-                return value;
+                current = current.getNext();
+                return (current != null) ? current.getValue() : null;
             }
 
             @Override
             public void remove() {
-                Node<K, V> prev = (next != null) ? next.getPrev() : null;
-
-                if(prev != null){
-                    getThis().remove(prev.getKey());
+                if(current.hasPrev()){
+                    current.remove();
+                    getThis().remove(current.getKey());
                 }
             }
         };
@@ -98,7 +96,7 @@ class Node<K, V> {
     K key;
     V value;
 
-    public Node(K key, V value, LinkedHashtable<K, V> hashtable){
+    public Node(K key, V value){
         setValue(value);
         setKey(key);
         this.hashtable = hashtable;
