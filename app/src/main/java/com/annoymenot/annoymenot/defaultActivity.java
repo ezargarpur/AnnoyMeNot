@@ -22,7 +22,7 @@ public class defaultActivity extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_default);
-        Filter filter = new Filter();
+        Filter filter = Filter.getInstance();
         //callManager = new Call_Manager(filter);
         //textManager = new Text_Manager(filter);
         filter.addNumber("7033032158");
