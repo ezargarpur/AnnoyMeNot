@@ -8,9 +8,9 @@ import com.annoymenot.utils.PrefixTree;
 public class Filter {
 
     private PrefixTree blacklist;
-    private Filter singleton;
+    private static Filter singleton;
 
-    public Filter getFilterInstance(){
+    public static Filter getFilterInstance(){
         if(singleton == null){
             singleton = new Filter();
         }
