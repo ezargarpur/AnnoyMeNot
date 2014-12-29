@@ -12,7 +12,7 @@ import android.util.Log;
  */
 public class Call_Manager extends BroadcastReceiver
 {
-    private static final String managerType = "CALL";
+    private static final FilterType managerType = FilterType.CALL;
 
     @Override
     public void onReceive(Context context, Intent intent)
@@ -21,6 +21,7 @@ public class Call_Manager extends BroadcastReceiver
         if(state.equals(TelephonyManager.EXTRA_STATE_RINGING))
         {
             String callNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+            Message callMessage = new Message(callNumber, managerType);
         }
     }
 }
