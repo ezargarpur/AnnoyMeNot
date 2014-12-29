@@ -1,5 +1,7 @@
 package com.annoymenot.logic;
 
+import com.annoymenot.utils.TimeInterval;
+
 import java.util.*;
 
 /**
@@ -11,9 +13,7 @@ public class Contact_Group implements Iterable<Contact> {
     private boolean isCallBlocking, isTextBlocking;
     //TODO Add observer/listener to notify filter of changes
 
-    private GregorianCalendar relativeStart, relativeEnd; //TODO
-    private GregorianCalendar absoluteStart, absoluteEnd;
-    private boolean repeatAbsolute;
+    private TimeInterval interval;
 
     public Contact_Group(){
         contacts = new LinkedHashSet<Contact>();
@@ -30,14 +30,17 @@ public class Contact_Group implements Iterable<Contact> {
         boolean wasContained = contacts.remove(contact);
         return wasContained;
     }
+    public TimeInterval getTimeInterval(){
+        return interval;
+    }
     public void setCallBlocking(boolean value){
         isCallBlocking = value;
     }
     public void setTextBlocking(boolean value){
         isTextBlocking = value;
     }
-    public void setAbsoluteRepeat(boolean value){
-        repeatAbsolute = value;
+    public void setTimeInterval(TimeInterval interval){
+        this.interval = interval;
     }
 
     @Override

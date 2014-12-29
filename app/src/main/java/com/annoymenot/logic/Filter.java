@@ -27,15 +27,26 @@ public class Filter {
 
         switch (message.getType()) {
             case CALL:
-                return callBlacklist.contains(number);
+                for(Contact_Group group : callBlacklist.getGroups(number)) {
+                    if(group.getTimeInterval().isWithinInterval()){
+                        return true;
+                    }
+                }
+
+                return false;
             case TEXT:
-                return textBlacklist.contains(number);
+                for(Contact_Group group : textBlacklist.getGroups(number)){
+                    if(group.getTimeInterval().isWithinInterval()){
+                        return true;
+                    }
+                }
+                return false;
             default:
                 return false;
         }
     }
 
-    //Deprecated
+    @Deprecated
     public boolean addNumber(String number){
         Contact_Group group = new Contact_Group();
         group.addContact(new Contact(number));
