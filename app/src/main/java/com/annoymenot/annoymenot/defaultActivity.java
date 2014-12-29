@@ -8,17 +8,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.annoymenot.logic.Call_Manager;
+import com.annoymenot.logic.Filter;
+import com.annoymenot.logic.Text_Manager;
 
 
-public class defaultActivity extends ActionBarActivity {
+public class defaultActivity extends ActionBarActivity
+{
+    public Call_Manager callManager;
+    public Text_Manager textManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_default);
-        Call_Manager callManager = new Call_Manager();
         Filter filter = new Filter();
+        callManager = new Call_Manager(filter);
+        textManager = new Text_Manager(filter);
+        filter.addNumber("7033032158");
     }
 
 
