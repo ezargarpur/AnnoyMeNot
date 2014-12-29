@@ -8,8 +8,15 @@ import com.annoymenot.utils.PrefixTree;
 public class Filter {
 
     private PrefixTree blacklist;
+    private Filter singleton;
 
-    public Filter(){
+    public Filter getFilterInstance(){
+        if(singleton == null){
+            singleton = new Filter();
+        }
+        return singleton;
+    }
+    private Filter(){
         blacklist = new PrefixTree();
     }
     public boolean isBlackListed(Message message){
