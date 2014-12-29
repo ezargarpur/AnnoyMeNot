@@ -14,6 +14,7 @@ public class Call_Manager extends BroadcastReceiver
 {
     private static final FilterType managerType = FilterType.CALL;
     private Filter cmFilter;
+    private int prevAudioState;
 
     public Call_Manager()
     {
@@ -25,10 +26,10 @@ public class Call_Manager extends BroadcastReceiver
     {
         AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         String phoneState = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
-        int prevAudioState = audioManager.getRingerMode();
 
         if(phoneState.equals(TelephonyManager.EXTRA_STATE_RINGING))
         {
+            prevAudioState = audioManager.getRingerMode();
             String callNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
             Message callMessage = new Message(callNumber, managerType);
 
