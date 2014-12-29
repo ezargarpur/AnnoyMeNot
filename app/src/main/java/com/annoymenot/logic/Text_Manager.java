@@ -10,6 +10,8 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Handler;
 
 /**
@@ -19,7 +21,7 @@ public class Text_Manager extends BroadcastReceiver
 {
     private static final FilterType managerType = FilterType.TEXT;
     private static final int SILENT_TIME = 300;
-    private static final Handler handler = new Handler();
+    //private static final Handler handler = new Handler();
     private Filter tmFilter;
 
     public Text_Manager ()
@@ -44,15 +46,30 @@ public class Text_Manager extends BroadcastReceiver
 
             audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 
-            handler.postDelayed(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    //Do something after 100ms
-                }
-            }, SILENT_TIME);
-
+            new Timer().schedule(new MyTimerTask(audioManager, prevAudioState), 5000);
         }
+    }
+
+    private void timerTask(AudioManager audioManager, int prevAudioState)
+    {
+        audioManager.setRingerMode(prevAudioState);
+    }
+}
+
+class MyTimerTask extends TimerTask {
+
+    private final AudioManager audioManager;
+    private final int prevAudioState;
+
+
+    MyTimerTask ( AudioManager audioManager, int prevAudioState )
+    {
+        this.audioManager = audioManager;
+        this.prevAudioState = prevAudioState;
+    }
+
+    public void run()
+    {
+        audioManager.setRingerMode(prevAudioState);
     }
 }
