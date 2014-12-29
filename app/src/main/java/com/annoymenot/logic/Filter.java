@@ -9,8 +9,15 @@ public class Filter {
 
     private PrefixTree callBlacklist;
     private PrefixTree textBlacklist;
+    private static Filter singleton;
 
-    public Filter(){
+    public static Filter getInstance(){
+        if(singleton == null){
+            singleton = new Filter();
+        }
+        return singleton;
+    }
+    private Filter(){
         callBlacklist = new PrefixTree();
         textBlacklist = new PrefixTree();
     }

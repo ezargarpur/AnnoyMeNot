@@ -1,7 +1,8 @@
 package com.annoymenot.utils;
 
-import android.util.Log;
+import com.annoymenot.logic.Contact_Group;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -13,6 +14,7 @@ public class PrefixTree
     public static class PrefixTreeNode
     {
         PrefixTreeNode[] children;
+        ArrayList<Contact_Group> groups;
 
         PrefixTreeNode()
         {
@@ -88,7 +90,9 @@ public class PrefixTree
         //The current number does not exist in the tree, so return false
         return false;
     }
+    public void addGroup(Contact_Group group){
 
+    }
     public void addNumber(String phoneNumber)
     {
         char[] characters = phoneNumber.toCharArray();
