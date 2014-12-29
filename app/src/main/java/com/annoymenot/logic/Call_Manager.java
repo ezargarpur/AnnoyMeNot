@@ -1,5 +1,6 @@
 package com.annoymenot.logic;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ public class Call_Manager extends BroadcastReceiver
     private static int prevAudioState;
 
     public Call_Manager()
+
     {
         cmFilter = Filter.getInstance();
     }
