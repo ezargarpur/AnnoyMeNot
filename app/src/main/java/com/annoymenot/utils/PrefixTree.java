@@ -24,6 +24,9 @@ public class PrefixTree
 
             return children[digit];
         }
+        public PrefixTreeNode getChild(int digit){
+            return children[digit];
+        }
     }
 
     private PrefixTreeNode root;
@@ -33,6 +36,23 @@ public class PrefixTree
         root = new PrefixTreeNode();
     }
 
+    public boolean contains(String phoneNumber){
+        char[] characters = phoneNumber.toCharArray();
+
+        PrefixTreeNode node = root;
+        for(char number : characters){
+            int digit = Character.getNumericValue(number);
+
+            PrefixTreeNode child = root.getChild(digit);
+
+            if(child == null){
+                return false;
+            }
+            node = child;
+        }
+        return true;
+    }
+    /*
     public boolean contains(String phoneNumber)
     {
         char[] charArray = phoneNumber.toCharArray();
@@ -45,6 +65,7 @@ public class PrefixTree
 
         return checkContains(root, charList);
     }
+    */
 
     private boolean checkContains(PrefixTreeNode node, LinkedList<Character> characters)
     {
