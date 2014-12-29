@@ -29,6 +29,7 @@ public class Filter {
 
         switch (message.getType()) {
             case CALL:
+                System.out.println(callBlacklist.getGroups(number).size());
                 for(Contact_Group group : callBlacklist.getGroups(number)) {
                     if(group.getTimeInterval().isWithinInterval()){
                         return true;

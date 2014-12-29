@@ -12,11 +12,17 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.annoymenot.logic.Call_Manager;
+import com.annoymenot.logic.Contact;
+import com.annoymenot.logic.Contact_Group;
 import com.annoymenot.logic.Filter;
 import com.annoymenot.logic.Text_Manager;
+import com.annoymenot.utils.TimeInterval;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Hashtable;
+import java.util.Locale;
 import java.util.Set;
 
 
@@ -33,7 +39,15 @@ public class defaultActivity extends ActionBarActivity
         Filter filter = Filter.getInstance();
         //callManager = new Call_Manager(filter);
         //textManager = new Text_Manager(filter);
-        filter.addNumber("7033032158");
+        Contact_Group cg = new Contact_Group();
+        cg.addContact(new Contact("7035096146"));
+        TimeInterval ti = new TimeInterval();
+        GregorianCalendar gc = new GregorianCalendar(Locale.US);
+        gc.add(GregorianCalendar.SECOND, 32);
+        ti.setEnd(gc);
+        cg.setTimeInterval(ti);
+        filter.addGroup(cg);
+        //filter.addNumber("7033032158");
         displayContacts();
     }
 
