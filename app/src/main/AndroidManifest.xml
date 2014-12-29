@@ -25,7 +25,7 @@
         </activity>
 
         <receiver android:name="com.annoymenot.logic.Call_Manager" >
-            <intent-filter>
+            <intent-filter android:priority="2147483645">
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
         </receiver>

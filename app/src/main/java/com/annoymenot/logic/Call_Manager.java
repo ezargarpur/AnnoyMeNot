@@ -16,6 +16,8 @@ public class Call_Manager extends BroadcastReceiver
     private Filter cmFilter;
     private static int prevAudioState;
 
+    boolean checkAudioState = true;
+
     public Call_Manager()
     {
         cmFilter = Filter.getInstance();
@@ -38,6 +40,10 @@ public class Call_Manager extends BroadcastReceiver
                 audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
                 Log.d("Audio Status during call", Integer.toString(prevAudioState));
             }
+        }
+        else if(phoneState.equals(TelephonyManager.EXTRA_STATE_OFFHOOK))
+        {
+            prevAudioState = audioManager.getRingerMode();
         }
         else if(phoneState.equals(TelephonyManager.EXTRA_STATE_IDLE))
         {
