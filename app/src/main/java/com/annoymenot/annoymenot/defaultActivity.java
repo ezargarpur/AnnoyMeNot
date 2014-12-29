@@ -14,8 +14,8 @@ import com.annoymenot.logic.Text_Manager;
 
 public class defaultActivity extends ActionBarActivity
 {
-    public Call_Manager callManager;
-    public Text_Manager textManager;
+    //public Call_Manager callManager;
+    //public Text_Manager textManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -23,8 +23,8 @@ public class defaultActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_default);
         Filter filter = new Filter();
-        callManager = new Call_Manager(filter);
-        textManager = new Text_Manager(filter);
+        //callManager = new Call_Manager(filter);
+        //textManager = new Text_Manager(filter);
         filter.addNumber("7033032158");
     }
 
