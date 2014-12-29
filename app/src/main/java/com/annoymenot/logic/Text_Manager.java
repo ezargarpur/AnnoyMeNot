@@ -41,8 +41,8 @@ public class Text_Manager extends BroadcastReceiver{
             }
 
             // show first message
-            Toast toast = Toast.makeText(context,"Phone numberBLOCKED Received SMS: " + smsMessage[0].getMessageBody(), Toast.LENGTH_LONG);
-            toast.show();
+            //Toast toast = Toast.makeText(context,"Phone numberBLOCKED Received SMS: " + smsMessage[0].getMessageBody(), Toast.LENGTH_LONG);
+            //toast.show();
             abortBroadcast();
             for(int i=0;i<8;i++)
             {
@@ -52,8 +52,8 @@ public class Text_Manager extends BroadcastReceiver{
         }
         else if(MSG_TYPE.equals("android.provider.Telephony.SEND_SMS"))
         {
-            Toast toast = Toast.makeText(context,"SMS SENT: "+MSG_TYPE , Toast.LENGTH_LONG);
-            toast.show();
+           // Toast toast = Toast.makeText(context,"SMS SENT: "+MSG_TYPE , Toast.LENGTH_LONG);
+           // toast.show();
             abortBroadcast();
             for(int i=0;i<8;i++)
             {
@@ -64,8 +64,8 @@ public class Text_Manager extends BroadcastReceiver{
         else
         {
 
-            Toast toast = Toast.makeText(context,"SIN ELSE: "+MSG_TYPE , Toast.LENGTH_LONG);
-            toast.show();
+           // Toast toast = Toast.makeText(context,"SIN ELSE: "+MSG_TYPE , Toast.LENGTH_LONG);
+           // toast.show();
             abortBroadcast();
             for(int i=0;i<8;i++)
             {
