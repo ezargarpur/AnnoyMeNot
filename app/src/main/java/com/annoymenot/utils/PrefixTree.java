@@ -16,6 +16,14 @@ public class PrefixTree
         {
             children = new PrefixTreeNode[10];
         }
+
+        public PrefixTreeNode addChild(int digit){
+            if(children[digit] == null){
+                children[digit] = new PrefixTreeNode();
+            }
+
+            return children[digit];
+        }
     }
 
     private PrefixTreeNode root;
@@ -58,6 +66,16 @@ public class PrefixTree
 
     public void addNumber(String phoneNumber)
     {
+        char[] characters = phoneNumber.toCharArray();
+
+        PrefixTreeNode node = root;
+        for(char number : characters){
+            int digit = Character.getNumericValue(number);
+
+            PrefixTreeNode child = root.addChild(digit);
+            node = child;
+        }
+        /*
         char[] charArray = phoneNumber.toCharArray();
         LinkedList<Character> charList = new LinkedList<Character>();
 
@@ -67,6 +85,7 @@ public class PrefixTree
         }
 
         addNum(root, charList);
+        */
     }
 
     private void addNum(PrefixTreeNode node, LinkedList<Character> characters)
