@@ -17,6 +17,7 @@ public class Call_Manager extends BroadcastReceiver
 
     public Call_Manager()
     {
+        this.cmFilter = new Filter();
     }
 
     public Call_Manager(Filter filter)
