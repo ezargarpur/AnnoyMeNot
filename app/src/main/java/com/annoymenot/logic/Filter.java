@@ -7,24 +7,29 @@ import com.annoymenot.utils.PrefixTree;
  */
 public class Filter {
 
-    private PrefixTree blacklist;
-    private static Filter singleton;
+    private PrefixTree callBlacklist;
+    private PrefixTree textBlacklist;
+    private Filter singleton;
 
-    public static Filter getFilterInstance(){
-        if(singleton == null){
-            singleton = new Filter();
-        }
-        return singleton;
-    }
-    private Filter(){
-        blacklist = new PrefixTree();
+    public Filter(){
+        callBlacklist = new PrefixTree();
+        textBlacklist = new PrefixTree();
     }
     public boolean isBlackListed(Message message){
         String number = message.getPhoneNumber();
-        return blacklist.contains(number);
+
+        switch (message.getType()) {
+            case CALL:
+                return callBlacklist.contains(number);
+            case TEXT:
+                return textBlacklist.contains(number);
+            default:
+                return false;
+        }
     }
     public boolean addNumber(String number){
-        blacklist.addNumber(number);
+        callBlacklist.addNumber(number);
+        textBlacklist.addNumber(number);
         //TODO
         return false;
     }

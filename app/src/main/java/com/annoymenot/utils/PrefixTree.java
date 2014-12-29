@@ -67,7 +67,7 @@ public class PrefixTree
 
         return checkContains(root, charList);
     }
-    
+
 
     private boolean checkContains(PrefixTreeNode node, LinkedList<Character> characters)
     {

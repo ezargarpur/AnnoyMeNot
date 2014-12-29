@@ -29,7 +29,7 @@ public class Message
     {
         return phoneNumber;
     }
-    public FilterType setType()
+    public FilterType getType()
     {
         return type;
     }
