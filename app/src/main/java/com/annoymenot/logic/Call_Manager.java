@@ -3,7 +3,6 @@ package com.annoymenot.logic;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -14,11 +13,6 @@ public class Call_Manager extends BroadcastReceiver
 {
     private static final FilterType managerType = FilterType.CALL;
     private Filter cmFilter;
-
-    public Call_Manager()
-    {
-        cmFilter = Filter.getFilterInstance();
-    }
 
     public Call_Manager(Filter filter)
     {
@@ -33,6 +27,11 @@ public class Call_Manager extends BroadcastReceiver
         {
             String callNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
             Message callMessage = new Message(callNumber, managerType);
+
+            if(cmFilter.isBlackListed(callMessage))
+            {
+                //Block Call
+            }
         }
     }
 }
