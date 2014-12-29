@@ -67,7 +67,7 @@ public class Text_Manager extends BroadcastReceiver{
 
             }
 
-            audioManager.setRingerMode(prevAudioState);
+            //audioManager.setRingerMode(prevAudioState);
 
         }
     }

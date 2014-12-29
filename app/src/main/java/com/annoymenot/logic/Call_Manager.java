@@ -14,7 +14,7 @@ public class Call_Manager extends BroadcastReceiver
 {
     private static final FilterType managerType = FilterType.CALL;
     private Filter cmFilter;
-    private int prevAudioState;
+    private static int prevAudioState;
 
     public Call_Manager()
     {
