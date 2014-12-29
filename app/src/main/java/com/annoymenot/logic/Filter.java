@@ -9,7 +9,6 @@ public class Filter {
 
     private PrefixTree callBlacklist;
     private PrefixTree textBlacklist;
-    private Filter singleton;
 
     public Filter(){
         callBlacklist = new PrefixTree();
