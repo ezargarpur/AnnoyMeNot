@@ -1,5 +1,7 @@
 package com.annoymenot.utils;
 
+import android.util.Log;
+
 import java.util.LinkedList;
 
 /**

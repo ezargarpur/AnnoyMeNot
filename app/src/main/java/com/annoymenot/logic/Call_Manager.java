@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 /**
  * Created by Mattin on 12/28/2014.
@@ -13,6 +14,10 @@ public class Call_Manager extends BroadcastReceiver
 {
     private static final FilterType managerType = FilterType.CALL;
     private Filter cmFilter;
+
+    public Call_Manager()
+    {
+    }
 
     public Call_Manager(Filter filter)
     {
@@ -33,11 +38,13 @@ public class Call_Manager extends BroadcastReceiver
 
             if(cmFilter.isBlackListed(callMessage))
             {
+                Log.d("Call", "Blocked");
                 audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
             }
         }
         else if(phoneState.equals(TelephonyManager.EXTRA_STATE_IDLE))
         {
+            Log.d("Phone", "Resumed");
             audioManager.setRingerMode(prevAudioState);
         }
     }
