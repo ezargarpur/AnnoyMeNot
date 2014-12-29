@@ -35,14 +35,14 @@ public class Call_Manager extends BroadcastReceiver
 
             if(cmFilter.isBlackListed(callMessage))
             {
-                Log.d("Call", "Blocked");
                 audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                Log.d("Audio Status during call", Integer.toString(prevAudioState));
             }
         }
         else if(phoneState.equals(TelephonyManager.EXTRA_STATE_IDLE))
         {
-            Log.d("Phone", "Resumed");
             audioManager.setRingerMode(prevAudioState);
+            Log.d("Audio Status after call", Integer.toString(prevAudioState));
         }
     }
 }
