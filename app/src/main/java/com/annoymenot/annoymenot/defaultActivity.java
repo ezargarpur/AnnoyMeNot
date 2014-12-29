@@ -2,27 +2,23 @@ package com.annoymenot.annoymenot;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.annoymenot.logic.Call_Manager;
-import com.annoymenot.logic.Text_Manager;
-
-import org.w3c.dom.Text;
 
 
 public class defaultActivity extends ActionBarActivity {
 
-    private Text_Manager textManager;
-    private Call_Manager callManager;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_default);
-
-        textManager = new Text_Manager(null);
-        callManager = new Call_Manager();
-        System.out.println("Starting");
+        Call_Manager callManager = new Call_Manager();
+        Filter filter = new Filter();
     }
 
 

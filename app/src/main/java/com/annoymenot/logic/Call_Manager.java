@@ -13,6 +13,12 @@ import android.util.Log;
 public class Call_Manager extends BroadcastReceiver
 {
     private static final FilterType managerType = FilterType.CALL;
+    private Filter cmFilter;
+
+    public Call_Manager(Filter filter)
+    {
+        cmFilter = filter;
+    }
 
     @Override
     public void onReceive(Context context, Intent intent)
@@ -22,6 +28,11 @@ public class Call_Manager extends BroadcastReceiver
         {
             String callNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
             Message callMessage = new Message(callNumber, managerType);
+            Boolean upDog = cmFilter.isBlackListed(callMessage);
+            if(upDog)
+                Log.d("Call", "Blocked");
+            else
+                Log.d("Call", "Allowed");
         }
     }
 }
