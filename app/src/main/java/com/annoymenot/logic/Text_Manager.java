@@ -3,6 +3,7 @@ package com.annoymenot.logic;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
@@ -29,8 +30,12 @@ public class Text_Manager extends BroadcastReceiver{
         String MSG_TYPE=intent.getAction();
         if(MSG_TYPE.equals(SMS_RECEIVED))
         {
-            Toast toast = Toast.makeText(context,"SMS Received: "+MSG_TYPE , Toast.LENGTH_LONG);
-            toast.show();
+            AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+            int prevAudioState = audioManager.getRingerMode();
+            audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+
+           // Toast toast = Toast.makeText(context,"SMS Received: "+MSG_TYPE , Toast.LENGTH_LONG);
+           // toast.show();
 
             Bundle bundle = intent.getExtras();
 
@@ -59,15 +64,10 @@ public class Text_Manager extends BroadcastReceiver{
 
                 Message filterMessage = new Message(phoneNumber, type);
 
-                // show first message
-                toast = Toast.makeText(context,"Phone numberBLOCKED Received SMS: " + message, Toast.LENGTH_LONG);
-                toast.show();
-                abortBroadcast();
-                for(int i=0;i<8;i++)
-                {
-                    System.out.println("Blocking SMS **********************");
-                }
+
             }
+
+            audioManager.setRingerMode(prevAudioState);
 
         }
     }
