@@ -175,7 +175,7 @@ public class PrefixTree
         return false;
     }
 
-    public void removeNumber(String phoneNumber)
+    public void removeNumber(String phoneNumber, int groupID)
     {
         if(this.contains(phoneNumber))
         {

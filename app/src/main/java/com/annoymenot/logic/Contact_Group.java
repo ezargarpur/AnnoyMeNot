@@ -11,11 +11,14 @@ public class Contact_Group implements Iterable<Contact> {
     private String groupName;
     private LinkedHashSet<Contact> contacts;
     private boolean isCallBlocking, isTextBlocking;
+    private int groupID;
+    private static int lastID = 0;
     //TODO Add observer/listener to notify filter of changes
 
     private TimeInterval interval;
 
     public Contact_Group(){
+        groupID = lastID++;
         contacts = new LinkedHashSet<Contact>();
     }
 
@@ -28,10 +31,15 @@ public class Contact_Group implements Iterable<Contact> {
     }
     public boolean removeContact(Contact contact){
         boolean wasContained = contacts.remove(contact);
+
+        Filter.getInstance().remove(contact.getNumber(), groupID);
         return wasContained;
     }
     public TimeInterval getTimeInterval(){
         return interval;
+    }
+    public int getID(){
+        return groupID;
     }
     public void setCallBlocking(boolean value){
         isCallBlocking = value;

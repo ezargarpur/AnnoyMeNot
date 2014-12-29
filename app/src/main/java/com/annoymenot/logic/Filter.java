@@ -1,5 +1,7 @@
 package com.annoymenot.logic;
 
+import android.util.Log;
+
 import com.annoymenot.utils.PrefixTree;
 
 import java.util.Iterator;
@@ -32,7 +34,10 @@ public class Filter {
                 System.out.println(callBlacklist.getGroups(number).size());
                 for(Contact_Group group : callBlacklist.getGroups(number)) {
                     if(group.getTimeInterval().isWithinInterval()){
+                        Log.d("Interval", "Is within");
                         return true;
+                    } else {
+
                     }
                 }
 
@@ -59,8 +64,11 @@ public class Filter {
         //TODO
         return false;
     }
-    public boolean removeNumber(String number){
+    public boolean remove(String phoneNumber, int groupID){
         //TODO
+
+        callBlacklist.removeNumber(phoneNumber, groupID);
+
         return false;
     }
     public boolean addGroup(Contact_Group group){
@@ -71,6 +79,6 @@ public class Filter {
     }
     public boolean removeGroup(Contact_Group group){
         //TODO
-        return false;
+        throw new UnsupportedOperationException();
     }
 }
