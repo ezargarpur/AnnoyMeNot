@@ -10,6 +10,10 @@ import android.util.Log;
 /**
  * Created by ezargarpur on 12/28/2014.
  */
+
+/**
+ * Modified by Aman on 12/29/2014
+ */
 public class Text_Manager extends BroadcastReceiver{
     private Filter filter;
     private static final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
@@ -21,11 +25,11 @@ public class Text_Manager extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
         if (SMS_RECEIVED.equals(intent.getAction())) {
-            this.abortBroadcast();
 
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
                 // get sms objects
+                abortBroadcast();
                 Object[] pdus = (Object[]) bundle.get("pdus");
                 if (pdus.length == 0) {
                     return;
