@@ -1,5 +1,6 @@
 package com.annoymenot.utils;
 
+import com.annoymenot.logic.Contact;
 import com.annoymenot.logic.Contact_Group;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class PrefixTree
         PrefixTreeNode()
         {
             children = new PrefixTreeNode[10];
+            groups = new ArrayList<Contact_Group>();
         }
 
         public PrefixTreeNode addChild(int digit){
@@ -30,6 +32,12 @@ public class PrefixTree
         }
         public PrefixTreeNode getChild(int digit){
             return children[digit];
+        }
+        public void addGroup(Contact_Group group){
+            groups.add(group);
+        }
+        public ArrayList<Contact_Group> getGroups(){
+            return groups;
         }
     }
 
@@ -91,9 +99,35 @@ public class PrefixTree
         return false;
     }
     public void addGroup(Contact_Group group){
-
+        for(Contact contact : group){
+            addNumber(contact.getNumber(), group);
+        }
     }
-    public void addNumber(String phoneNumber)
+
+    /**
+     * Gets the Contact Groups where the number exists
+     * @param phoneNumber
+     * @return the groups where the number is located or an empty list if the number isn't within the tree
+     */
+    public ArrayList<Contact_Group> getGroups(String phoneNumber){
+        ArrayList<Contact_Group> groups = new ArrayList<Contact_Group>();
+        char[] characters = phoneNumber.toCharArray();
+
+        PrefixTreeNode node = root;
+        for(char number : characters){
+            int digit = Character.getNumericValue(number);
+
+            PrefixTreeNode child = node.getChild(digit);
+
+            if(child == null){
+                //Invalid number
+                return new ArrayList<Contact_Group>();
+            }
+            node = child;
+        }
+        return node.getGroups();
+    }
+    private void addNumber(String phoneNumber, Contact_Group group)
     {
         char[] characters = phoneNumber.toCharArray();
 
@@ -104,40 +138,8 @@ public class PrefixTree
             PrefixTreeNode child = node.addChild(digit);
             node = child;
         }
-        /*
-        char[] charArray = phoneNumber.toCharArray();
-        LinkedList<Character> charList = new LinkedList<Character>();
 
-        for(int i = 0; i < charArray.length; i++)
-        {
-            charList.add(charArray[i]);
-        }
-
-        addNum(root, charList);
-        */
-    }
-
-    private void addNum(PrefixTreeNode node, LinkedList<Character> characters)
-    {
-        //Check if the list of characters has been exhausted, exit if so
-        if(characters.size() == 0)
-        {
-            return;
-        }
-        //Check if the current number already has a child
-        int index = Character.getNumericValue((char) characters.getFirst());
-        if(node.children[index] != null)
-        {
-            characters.removeFirst();
-            addNum(node.children[index], characters);
-            return;
-        }
-        //Reaching this point means the current number does not have a child
-
-        //Create the child and continue moving down
-        PrefixTreeNode child = new PrefixTreeNode();
-        node.children[index] = child;
-        addNum(child, characters);
+        node.addGroup(group);
     }
 
     private void getSequence(PrefixTreeNode node, LinkedList<Character> characters, LinkedList<PrefixTreeNode> sequence)

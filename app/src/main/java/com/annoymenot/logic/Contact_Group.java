@@ -5,9 +5,9 @@ import java.util.*;
 /**
  * Created by ezargarpur on 12/28/2014.
  */
-public class Contact_Group {
+public class Contact_Group implements Iterable<Contact> {
     private String groupName;
-    private HashSet<Contact> contacts;
+    private LinkedHashSet<Contact> contacts;
     private boolean isCallBlocking, isTextBlocking;
     //TODO Add observer/listener to notify filter of changes
 
@@ -16,7 +16,7 @@ public class Contact_Group {
     private boolean repeatAbsolute;
 
     public Contact_Group(){
-        contacts = new HashSet<Contact>();
+        contacts = new LinkedHashSet<Contact>();
     }
 
     public boolean addContact(Contact contact){
@@ -40,4 +40,8 @@ public class Contact_Group {
         repeatAbsolute = value;
     }
 
+    @Override
+    public Iterator<Contact> iterator() {
+        return contacts.iterator();
+    }
 }

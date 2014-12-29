@@ -21,6 +21,7 @@ public class Filter {
         callBlacklist = new PrefixTree();
         textBlacklist = new PrefixTree();
     }
+
     public boolean isBlackListed(Message message){
         String number = message.getPhoneNumber();
 
@@ -33,9 +34,14 @@ public class Filter {
                 return false;
         }
     }
+
+    //Deprecated
     public boolean addNumber(String number){
-        callBlacklist.addNumber(number);
-        textBlacklist.addNumber(number);
+        Contact_Group group = new Contact_Group();
+        group.addContact(new Contact(number));
+
+        callBlacklist.addGroup(group);
+        textBlacklist.addGroup(group);
         //TODO
         return false;
     }
