@@ -109,6 +109,22 @@ public class PrefixTree
         }
     }
 
+    private boolean hasOtherChildren(PrefixTreeNode n, int index)
+    {
+        for(int i = 0; i < n.children.length; i++)
+        {
+            if(i == index)
+            {
+                continue;
+            }
+            else if(n.children[i] != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void removeNumber(String phoneNumber)
     {
         if(this.contains(phoneNumber))
@@ -124,9 +140,22 @@ public class PrefixTree
             LinkedList<PrefixTreeNode> sequence = new LinkedList<PrefixTreeNode>();
             getSequence(root, charList, sequence);
 
-            for(int i = charList.size() - 1; i >=0; i--)
-            {
+            sequence.removeLast();
 
+            int index = Character.getNumericValue(charArray[charArray.length-1]);
+            sequence.getLast().children[index] = null;
+            boolean hasChildren = hasOtherChildren(sequence.getLast(), index);
+
+            for(int i = charArray.length - 2; i >=0; i--)
+            {
+                sequence.removeLast();
+                if(hasChildren)
+                {
+                    break;
+                }
+                index = Character.getNumericValue(charArray[i]);
+                sequence.getLast().children[index] = null;
+                hasChildren = hasOtherChildren(sequence.getLast(), index);
             }
         }
     }
