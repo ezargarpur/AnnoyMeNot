@@ -2,6 +2,8 @@ package com.annoymenot.logic;
 
 import com.annoymenot.utils.PrefixTree;
 
+import java.util.Iterator;
+
 /**
  * Created by ezargarpur on 12/28/2014.
  */
@@ -62,6 +64,8 @@ public class Filter {
     }
     public boolean addGroup(Contact_Group group){
         //TODO
+        callBlacklist.addGroup(group);
+        textBlacklist.addGroup(group);
         return false;
     }
     public boolean removeGroup(Contact_Group group){
