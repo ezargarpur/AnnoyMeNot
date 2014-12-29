@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 /**
  * Created by Mattin on 12/28/2014.
@@ -16,19 +17,10 @@ public class Call_Manager extends BroadcastReceiver
     @Override
     public void onReceive(Context context, Intent intent)
     {
-        
-    }
-
-    /*@Override
-    public void onCallStateChanged(int state, String incomingNumber)
-    {
-        if(state == TelephonyManager.CALL_STATE_RINGING)
+        String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+        if(state.equals(TelephonyManager.EXTRA_STATE_RINGING))
         {
-            Message callMessage = new Message(incomingNumber, FilterType.CALL);
-            if(Filter.checkMessage(callMessage))
-            {
-                //Hangup call.
-            }
+            String callNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
         }
-    }*/
+    }
 }

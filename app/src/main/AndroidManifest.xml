@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.annoymenot.annoymenot" >
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -12,19 +14,15 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <receiver android:name="Call_Manager" >
-                <intent-filter>
-                    <action android:name="android.intent.action.PHONE_STATE" />
-                </intent-filter>
-            </receiver>
-
         </activity>
 
-        <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+        <receiver android:name="com.annoymenot.logic.Call_Manager" >
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
