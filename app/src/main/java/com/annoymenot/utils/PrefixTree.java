@@ -193,19 +193,27 @@ public class PrefixTree
             sequence.removeLast();
 
             int index = Character.getNumericValue(charArray[charArray.length-1]);
-            sequence.getLast().children[index] = null;
-            boolean hasChildren = hasOtherChildren(sequence.getLast(), index);
-
-            for(int i = charArray.length - 2; i >=0; i--)
+            ArrayList<Contact_Group> groups = sequence.getLast().children[index].groups;
+            for(int i = 0; i < groups.size(); i++)
             {
-                sequence.removeLast();
-                if(hasChildren)
+                if(groupID == groups.get(i).getID())
                 {
-                    break;
+                    sequence.getLast().children[index].groups.remove(i);
                 }
-                index = Character.getNumericValue(charArray[i]);
+            }
+            if(sequence.getLast().children[index].groups.size() == 0) {
                 sequence.getLast().children[index] = null;
-                hasChildren = hasOtherChildren(sequence.getLast(), index);
+                boolean hasChildren = hasOtherChildren(sequence.getLast(), index);
+
+                for (int i = charArray.length - 2; i >= 0; i--) {
+                    sequence.removeLast();
+                    if (hasChildren) {
+                        break;
+                    }
+                    index = Character.getNumericValue(charArray[i]);
+                    sequence.getLast().children[index] = null;
+                    hasChildren = hasOtherChildren(sequence.getLast(), index);
+                }
             }
         }
     }

@@ -49,11 +49,6 @@ public class Text_Manager extends BroadcastReceiver
             new Timer().schedule(new MyTimerTask(audioManager, prevAudioState), 5000);
         }
     }
-
-    private void timerTask(AudioManager audioManager, int prevAudioState)
-    {
-        audioManager.setRingerMode(prevAudioState);
-    }
 }
 
 class MyTimerTask extends TimerTask {
