@@ -18,6 +18,11 @@ public class Text_Manager extends BroadcastReceiver{
     private Filter filter;
     private static final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
 
+    public Text_Manager ()
+    {
+        this.filter = new Filter();
+    }
+
     public Text_Manager(Filter filter){
         this.filter = filter;
     }
