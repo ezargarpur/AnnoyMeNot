@@ -27,56 +27,13 @@ public class Text_Manager extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
         String MSG_TYPE=intent.getAction();
-        if(MSG_TYPE.equals("android.provider.Telephony.SMS_RECEIVED"))
+        if(MSG_TYPE.equals(SMS_RECEIVED))
         {
-//          Toast toast = Toast.makeText(context,"SMS Received: "+MSG_TYPE , Toast.LENGTH_LONG);
-//          toast.show();
+            Toast toast = Toast.makeText(context,"SMS Received: "+MSG_TYPE , Toast.LENGTH_LONG);
+            toast.show();
 
             Bundle bundle = intent.getExtras();
-            Object messages[] = (Object[]) bundle.get("pdus");
-            SmsMessage smsMessage[] = new SmsMessage[messages.length];
-            for (int n = 0; n < messages.length; n++)
-            {
-                smsMessage[n] = SmsMessage.createFromPdu((byte[]) messages[n]);
-            }
 
-            // show first message
-            //Toast toast = Toast.makeText(context,"Phone numberBLOCKED Received SMS: " + smsMessage[0].getMessageBody(), Toast.LENGTH_LONG);
-            //toast.show();
-            abortBroadcast();
-            for(int i=0;i<8;i++)
-            {
-                System.out.println("Blocking SMS **********************");
-            }
-
-        }
-        else if(MSG_TYPE.equals("android.provider.Telephony.SEND_SMS"))
-        {
-           // Toast toast = Toast.makeText(context,"SMS SENT: "+MSG_TYPE , Toast.LENGTH_LONG);
-           // toast.show();
-            abortBroadcast();
-            for(int i=0;i<8;i++)
-            {
-                System.out.println("Blocking SMS **********************");
-            }
-
-        }
-        else
-        {
-
-           // Toast toast = Toast.makeText(context,"SIN ELSE: "+MSG_TYPE , Toast.LENGTH_LONG);
-           // toast.show();
-            abortBroadcast();
-            for(int i=0;i<8;i++)
-            {
-                System.out.println("Blocking SMS **********************");
-            }
-
-        }
-
-        /*if (SMS_RECEIVED.equals(intent.getAction())) {
-
-            Bundle bundle = intent.getExtras();
             if (bundle != null) {
                 // get sms objects
                 abortBroadcast();
@@ -96,11 +53,22 @@ public class Text_Manager extends BroadcastReceiver{
 
                 Log.d("sms", sender);
                 Log.d("sms", message);
-            }
-        }*/
-        String phoneNumber = null;
-        FilterType type = FilterType.TEXT;
 
-        Message filterMessage = new Message(phoneNumber, type);
+                String phoneNumber = sender;
+                FilterType type = FilterType.TEXT;
+
+                Message filterMessage = new Message(phoneNumber, type);
+
+                // show first message
+                toast = Toast.makeText(context,"Phone numberBLOCKED Received SMS: " + message, Toast.LENGTH_LONG);
+                toast.show();
+                abortBroadcast();
+                for(int i=0;i<8;i++)
+                {
+                    System.out.println("Blocking SMS **********************");
+                }
+            }
+
+        }
     }
 }
