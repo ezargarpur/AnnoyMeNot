@@ -40,10 +40,10 @@ public class defaultActivity extends ActionBarActivity
         //callManager = new Call_Manager(filter);
         //textManager = new Text_Manager(filter);
         Contact_Group cg = new Contact_Group();
-        cg.addContact(new Contact("7035096146"));
+        cg.addContact(new Contact("17035096146"));
         TimeInterval ti = new TimeInterval();
         GregorianCalendar gc = new GregorianCalendar(Locale.US);
-        gc.add(GregorianCalendar.SECOND, 32);
+        gc.add(GregorianCalendar.SECOND, 420);
         ti.setEnd(gc);
         cg.setTimeInterval(ti);
         filter.addGroup(cg);

@@ -21,7 +21,6 @@ public class Text_Manager extends BroadcastReceiver
 {
     private static final FilterType managerType = FilterType.TEXT;
     private static final int SILENT_TIME = 300;
-    //private static final Handler handler = new Handler();
     private Filter tmFilter;
 
     public Text_Manager ()
@@ -36,11 +35,12 @@ public class Text_Manager extends BroadcastReceiver
         Object[] pdus = (Object[]) bundle.get("pdus");
         SmsMessage smsSender = SmsMessage.createFromPdu((byte[])pdus[0]);
         String sender = smsSender.getOriginatingAddress();
-        Message textMessage = new Message(sender, managerType);
+        Message textMessage = new Message(sender.substring(1,sender.length()), managerType);
         Log.d("Sender", sender); //debug
 
         if(tmFilter.isBlackListed(textMessage))
         {
+            Log.d("Text", "Blocked");
             AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
             int prevAudioState = audioManager.getRingerMode();
 
@@ -48,15 +48,13 @@ public class Text_Manager extends BroadcastReceiver
 
             new Timer().schedule(new MyTimerTask(audioManager, prevAudioState), 5000);
         }
-    }
-
-    private void timerTask(AudioManager audioManager, int prevAudioState)
-    {
-        audioManager.setRingerMode(prevAudioState);
+        else
+            Log.d("Text", "Allowed");
     }
 }
 
-class MyTimerTask extends TimerTask {
+class MyTimerTask extends TimerTask
+{
 
     private final AudioManager audioManager;
     private final int prevAudioState;
