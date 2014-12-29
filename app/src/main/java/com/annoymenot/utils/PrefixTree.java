@@ -127,7 +127,7 @@ public class PrefixTree
         }
         return node.getGroups();
     }
-    private void addNumber(String phoneNumber, Contact_Group group)
+    public void addNumber(String phoneNumber, Contact_Group group)
     {
         char[] characters = phoneNumber.toCharArray();
 
@@ -139,7 +139,7 @@ public class PrefixTree
             node = child;
         }
 
-        node.addGroup(group);
+        node.addGroup(group);//TODO possible error? What if you add the same number twice? or add the same group twice?
     }
 
     private void getSequence(PrefixTreeNode node, LinkedList<Character> characters, LinkedList<PrefixTreeNode> sequence)

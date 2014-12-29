@@ -24,6 +24,8 @@ public class Contact_Group implements Iterable<Contact> {
 
     public boolean addContact(Contact contact){
         boolean wasContained = contacts.add(contact);
+
+        Filter.getInstance().addNumber(contact.getNumber(), this);
         return wasContained;
     }
     public boolean contains(Contact contact){

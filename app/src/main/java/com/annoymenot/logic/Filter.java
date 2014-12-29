@@ -54,13 +54,10 @@ public class Filter {
         }
     }
 
-    @Deprecated
-    public boolean addNumber(String number){
-        Contact_Group group = new Contact_Group();
-        group.addContact(new Contact(number));
 
-        callBlacklist.addGroup(group);
-        textBlacklist.addGroup(group);
+    public boolean addNumber(String number, Contact_Group group){
+        callBlacklist.addNumber(number, group);
+        textBlacklist.addNumber(number, group);
         //TODO
         return false;
     }
@@ -68,7 +65,7 @@ public class Filter {
         //TODO
 
         callBlacklist.removeNumber(phoneNumber, groupID);
-
+        textBlacklist.removeNumber(phoneNumber, groupID);
         return false;
     }
     public boolean addGroup(Contact_Group group){
