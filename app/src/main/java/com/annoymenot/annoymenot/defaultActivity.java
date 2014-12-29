@@ -15,6 +15,10 @@ import com.annoymenot.logic.Call_Manager;
 import com.annoymenot.logic.Filter;
 import com.annoymenot.logic.Text_Manager;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Set;
+
 
 public class defaultActivity extends ActionBarActivity
 {
@@ -59,6 +63,8 @@ public class defaultActivity extends ActionBarActivity
     //Method to retrieve the contact list
     private void displayContacts() {
 
+        Hashtable<String, ArrayList<String>> contactInfo = new Hashtable<String, ArrayList<String>>();
+
         ContentResolver cr = getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, null);
@@ -73,13 +79,22 @@ public class defaultActivity extends ActionBarActivity
                             null,
                             ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = ?",
                             new String[]{id}, null);
+                    contactInfo.put(name, new ArrayList<String> ());
                     while (pCur.moveToNext()) {
                         String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        Toast.makeText(this, "Name: " + name + ", Phone No: " + phoneNo, Toast.LENGTH_SHORT).show();
+                        String rawNumber = phoneNo.replaceAll("[^0-9]", "");
+                        contactInfo.get(name).add(rawNumber);
                     }
                     pCur.close();
                 }
             }
+        }
+
+        Set<String> keys = contactInfo.keySet();
+        Log.d("contact test", "Number of contacts: " + keys.size());
+        for(String key : keys)
+        {
+            Log.d("contact test", "Name: " + key + ", Phone No: " + contactInfo.get(key));
         }
     }
 }
