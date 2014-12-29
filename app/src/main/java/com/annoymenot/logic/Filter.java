@@ -12,7 +12,8 @@ public class Filter {
     public Filter(){
         blacklist = new PrefixTree();
     }
-    public boolean isBlackListed(String number){
+    public boolean isBlackListed(Message message){
+        String number = message.getPhoneNumber();
         return blacklist.contains(number);
     }
     public boolean addNumber(String number){
