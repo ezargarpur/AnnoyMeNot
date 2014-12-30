@@ -6,13 +6,10 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
-import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Handler;
 
 /**
  * Created by Mattin on 12/28/2014.
@@ -20,8 +17,6 @@ import java.util.logging.Handler;
 public class Text_Manager extends BroadcastReceiver
 {
     private static final FilterType managerType = FilterType.TEXT;
-    private static final int SILENT_TIME = 300;
-    //private static final Handler handler = new Handler();
     private Filter tmFilter;
 
     public Text_Manager ()
@@ -51,7 +46,8 @@ public class Text_Manager extends BroadcastReceiver
     }
 }
 
-class MyTimerTask extends TimerTask {
+class MyTimerTask extends TimerTask
+{
 
     private final AudioManager audioManager;
     private final int prevAudioState;

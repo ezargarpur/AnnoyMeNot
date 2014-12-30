@@ -1,6 +1,5 @@
 package com.annoymenot.logic;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +17,6 @@ public class Call_Manager extends BroadcastReceiver
     private static int prevAudioState;
 
     public Call_Manager()
-
     {
         cmFilter = Filter.getInstance();
     }
@@ -38,20 +36,15 @@ public class Call_Manager extends BroadcastReceiver
             if(cmFilter.isBlackListed(callMessage))
             {
                 audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                Log.d("Call", "Blocked");
             }
-            else//debug
-                Log.d("Call", "Allowed");
         }
         else if(phoneState.equals(TelephonyManager.EXTRA_STATE_OFFHOOK))
         {
             prevAudioState = audioManager.getRingerMode();
-            Log.d("Call", "Answered");
         }
         else if(phoneState.equals(TelephonyManager.EXTRA_STATE_IDLE))
         {
             audioManager.setRingerMode(prevAudioState);
-            Log.d("Call", "Ended");
         }
     }
 }
